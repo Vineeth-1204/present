@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            background-color: #FFF9F7; /* Cream White */
+            font-family: Arial, sans-serif;
+            color: #3E2723; /* Dark Brown */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, p {
+            color: #3E2723; /* Dark Brown */
+            text-align: center;
+        }
+
+        input[type="text"] {
+            border: 2px solid #FF8A65; /* Peach Orange */
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            color: #3E2723; /* Dark Brown */
+            background-color: #FFF9F7; /* Cream White */
+            margin-bottom: 10px; /* Adds space below the input */
+        }
+
+        button#submit {
+            background-color: #FF8A65; /* Peach Orange */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button#submit:hover {
+            background-color: #FF5B99; /* Pale Peach (for hover effect) */
+        }
+
+        h2#message {
+            color: #3E2723; /* Dark Brown */
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="../static/loginscript.js" defer type="module"></script>
+</head>
+<body>
+    <h1>Login Page</h1>
+    <p>Username :</p>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <p>Password :</p>
+    <input type="text" id="password" name="password" required>
+    <br>
+    <button id="submit" type="button">Login</button>
+    <br>
+    <h2 id="message"></h2>
+</body>
+</html>

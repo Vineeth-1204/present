@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit OTP</title>
+    <style>
+        body {
+            background-color: #FFF9F7; /* Cream White */
+            font-family: Arial, sans-serif;
+            color: #3E2723; /* Dark Brown */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #otp {
+            border: 2px solid #FF8A65; /* Peach Orange */
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            color: #3E2723; /* Dark Brown */
+            background-color: #FFF9F7; /* Cream White */
+        }
+
+        #submit {
+            background-color: #FF8A65; /* Peach Orange */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #submit:hover {
+            background-color: #FF5B99; /* Pale Peach (for hover effect) */
+        }
+
+        h1, h2 {
+            color: #3E2723; /* Dark Brown */
+            text-align: center;
+        }
+
+        /* The original rule is kept */
+        #photo {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <input type="number" id="otp" name="otp" required>
+    <button id="submit" type="button">Submit OTP</button>
+    <h1 id="message"></h1>
+    <h2 id="subject"></h2>
+    <h2 id="classroom"></h2>
+    <h2 id="you"></h2>
+</body>
+<script src="./static/pages/otpscript.js" defer type="module"></script>
+<script type="module">
+</script>
+</html>

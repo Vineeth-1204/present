@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeTable</title>
+    <style>
+        body {
+            background-color: #FFF9F7; /* Cream White */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #3E2723; /* Dark Brown */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        label, select, button {
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        select {
+            padding: 10px;
+            border: 2px solid #FF8A65; /* Peach Orange */
+            border-radius: 8px;
+            background-color: #FFF9F7;
+            color: #3E2723;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #FFD180; /* Soft Yellow */
+        }
+
+        button#fetch {
+            background-color: #FF8A65; /* Peach Orange */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 138, 101, 0.2);
+        }
+
+        button#fetch:hover {
+            background-color: #FFD180; /* Soft Yellow */
+            color: #3E2723;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(255, 209, 128, 0.3);
+        }
+
+        button#fetch:active {
+            transform: scale(0.97);
+        }
+
+        #timetable table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #FFF9F7;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(62, 39, 35, 0.05);
+            animation: fadeIn 1s ease;
+        }
+
+        #timetable th, #timetable td {
+            padding: 12px 16px;
+            border: 1px solid #FFD180; /* Soft Yellow */
+            text-align: left;
+        }
+
+        #timetable th {
+            background-color: #FF8A65; /* Peach Orange */
+            color: #3E2723;
+            font-weight: 600;
+        }
+        
+        #timetable tr:nth-child(even) {
+            background-color: #FFD18040; /* Slightly lighter Soft Yellow for alternating rows */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <h1>TimeTable</h1>
+    <label for="day">Choose a day:</label>
+    <select id="day">
+        <option value="Monday">MONDAY</option>
+        <option value="Tuesday">TUESDAY</option>
+        <option value="Wednesday">WEDNESDAY</option>
+        <option value="Thursday">THURSDAY</option>
+        <option value="Friday">FRIDAY</option>
+        <option value="Saturday">SATURDAY</option>
+    </select>
+    <button id="fetch">Fetch Timetable</button>
+
+    <h2>Results:</h2>
+    <div id="timetable"></div>
+</body>
+
+<script type="module">
+    import { session } from "./static/session_token.js";
+    import ipaddr from "./static/ip.js"
+    const ses_name = await session();
+    console.log("Session Name :", ses_name);
+
+    if (ses_name == "0") {
+        window.location.href = "/login";
+    }
+
+    const buton = document.getElementById("fetch");
+    buton.addEventListener("click", get_timetable);
+
+    async function get_timetable() {
+        const day = document.getElementById("day").value; 
+        const timetable_data = await fetch(`https://${ipaddr}:6969/timetable_api`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ roll: ses_name, day: day })
+        });
+
+        let timetable_json = await timetable_data.json();
+        console.log(timetable_json);
+
+        renderTable(timetable_json);
+    }
+
+    function renderTable(data) {
+        let tableHTML = `
+            <table border="1" cellpadding="5" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Start Time</th>
+                        <th>Duration</th>
+                        <th>Class Name</th>
+                        <th>Subject</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        for (let i = 1; i <= 6; i++) {
+            const cls = data[`class${i}`];
+            if (cls && cls[`class${i}_start`] !== null) {
+                tableHTML += `
+                    <tr>
+                        <td>Class ${i}</td>
+                        <td>${cls[`class${i}_start`]}</td>
+                        <td>${cls[`class${i}_duration`]}</td>
+                        <td>${cls[`class${i}_name`]}</td>
+                        <td>${cls["subject"]}</td>
+                    </tr>
+                `;
+            }
+        }
+
+        tableHTML += `
+                </tbody>
+            </table>
+        `;
+
+        document.getElementById("timetable").innerHTML = tableHTML;
+    }
+</script>
+</html>

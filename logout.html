@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logout</title>
+    <style>
+        body {
+            background-color: #FFF9F7; /* Cream White */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #3E2723; /* Dark Brown */
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .logout-container {
+            background-color: #FFF9F7;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(62, 39, 35, 0.07);
+            padding: 36px 28px;
+            max-width: 360px;
+            width: 100%;
+            animation: fadeIn 1s ease;
+        }
+
+        h1 {
+            margin-bottom: 24px;
+            font-weight: 700;
+            font-size: 28px;
+        }
+
+        a.button {
+            display: inline-block;
+            background-color: #FF8A65; /* Peach Orange */
+            color: white; /* Changed text color to white for better contrast */
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 12px 28px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(255, 138, 101, 0.18);
+        }
+
+        a.button:hover {
+            background-color: #FFD180; /* Soft Yellow */
+            box-shadow: 0 6px 20px rgba(255, 209, 128, 0.3);
+            color: #3E2723; /* Dark Brown */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+
+        a.button:active {
+            transform: scale(0.97); /* Press effect */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 440px) {
+            .logout-container {
+                padding: 24px 16px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            a.button {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 14px 0;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-container">
+        <h1>You have been logged out</h1>
+        <a href="../login" class="button">Login Again</a>
+    </div>
+</body>
+</html>

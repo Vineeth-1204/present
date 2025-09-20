@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register User</title>
+    <style>
+        body {
+            background-color: #FFF9F7; /* Cream White */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #3E2723; /* Dark Brown */
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .register-container {
+            background-color: #FFF9F7;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(62, 39, 35, 0.07);
+            padding: 36px 28px;
+            max-width: 380px;
+            width: 100%;
+            animation: fadeIn 1s ease;
+        }
+
+        h1 {
+            margin-bottom: 24px;
+            font-weight: 700;
+            font-size: 28px;
+        }
+
+        p {
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            margin-left: 4px;
+        }
+
+        input[type="text"] {
+            background: #FFF9F7;
+            border: 2px solid #FF8A65; /* Peach Orange */
+            color: #3E2723; /* Dark Brown */
+            border-radius: 10px;
+            font-size: 16px;
+            padding: 12px 16px;
+            margin-bottom: 18px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #FFD180; /* Soft Yellow */
+            box-shadow: 0 2px 8px rgba(255, 209, 128, 0.30);
+        }
+
+        input[type="text"]::placeholder {
+            color: #AA8B73; /* Light Brown */
+            font-style: italic;
+        }
+
+        button#submit {
+            background: linear-gradient(90deg, #FF8A65 0%, #FFD180 100%);
+            color: #3E2723; /* Dark Brown */
+            border: none;
+            border-radius: 10px;
+            padding: 14px 0;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 14px rgba(255, 138, 101, 0.2);
+            width: 100%;
+        }
+
+        button#submit:hover {
+            background: linear-gradient(90deg, #FFD180 0%, #FF8A65 100%);
+            box-shadow: 0 6px 22px rgba(255, 209, 128, 0.35);
+            transform: scale(1.05);
+        }
+
+        button#submit:active {
+            transform: scale(0.97);
+        }
+
+        button#submit:disabled {
+            background: #FFB599; /* Pale Peach */
+            color: #AA8B73;
+            cursor: not-allowed;
+            opacity: 0.7;
+            box-shadow: none;
+        }
+
+        h2#message {
+            margin-top: 24px;
+            font-weight: 600;
+            min-height: 24px;
+            color: #3E2723;
+        }
+
+        .login-link {
+            font-size: 14px;
+            margin-top: 16px;
+        }
+
+        .login-link a {
+            color: #FF8A65;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #FFD180;
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(22px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 440px) {
+            .register-container {
+                padding: 24px 16px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+    <script src="../static/registerscript.js" defer></script>
+</head>
+<body>
+    <div class="register-container">
+        <h1>Register User Page</h1>
+        <p>Username :</p>
+        <input type="text" id="username" name="username" required placeholder="Enter your username" />
+        <p>Password :</p>
+        <input type="text" id="password" name="password" required placeholder="Enter your password" />
+        <button id="submit" type="button">Register</button>
+        <h2 id="message"></h2>
+        <p class="login-link">Already a user? <a href="/login">Log in here</a></p>
+    </div>
+</body>
+</html>

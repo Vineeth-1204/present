@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome!</title>
+    <style>
+        body {
+            background-color: #FFF9F7; /* Cream White */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #3E2723; /* Dark Brown */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 38px;
+            font-weight: 900;
+            margin: 24px 0 32px 0;
+            text-align: center;
+            width: 100%;
+            border-bottom: 3px solid #FF8A65; /* Peach Orange underline */
+            padding-bottom: 12px;
+            box-sizing: border-box;
+        }
+        span#name {
+            color: #FF8A65; /* Peach Orange */
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+        button {
+            width: 100%;
+            max-width: 320px;
+            background-color: #FF8A65; /* Peach Orange */
+            color: #3E2723; /* Dark Brown */
+            border: none;
+            border-radius: 10px;
+            padding: 14px 28px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 138, 101, 0.18);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            min-width: auto;
+        }
+        button:hover {
+            background-color: #FFD180; /* Soft Yellow */
+            box-shadow: 0 6px 20px rgba(255, 209, 128, 0.3);
+            transform: scale(1.05);
+        }
+        button:active {
+            transform: scale(0.96);
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+                margin: 20px 0 24px 0;
+            }
+            .button-container {
+                width: 100%;
+                gap: 16px;
+            }
+            button {
+                padding: 12px 0;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>WELCOME! <span id="name"></span></h1>
+    <div class="button-container">
+        <button id="to-timetable">Go to Timetable</button>
+        <button id="to-mark-attendance">Go to Mark Attendance</button>
+    </div>
+
+    <script type="module">
+        import { session } from "./static/session_token.js";
+
+        async function init() {
+            const ses_name = await session();
+            if (ses_name == "0") {
+                window.location.href = "/login";
+                return;
+            }
+            document.getElementById("name").innerText = ses_name;
+            document.getElementById("to-timetable").addEventListener("click", () => {
+                window.location.href = "/timetable";
+            });
+            document.getElementById("to-mark-attendance").addEventListener("click", () => {
+                window.location.href = "/otp";
+            });
+        }
+        init();
+    </script>
+</body>
+</html>

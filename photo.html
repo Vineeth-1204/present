@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Take Picture</title>
+    <style>
+        body {
+            background-color: #FFF9F7; /* Cream White */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            min-height: 100vh; /* Use min-height to allow content to expand */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Start content from the top */
+            align-items: center;
+            color: #3E2723; /* Dark Brown */
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        h1#result {
+            font-size: 20px;
+            font-weight: 600;
+            color: #FF8A65; /* Peach Orange */
+            margin-top: 0;
+            min-height: 24px;
+        }
+
+        /* Responsive video and canvas styling */
+        video, canvas {
+            width: 100%; /* Make them fill the available width */
+            max-width: 640px; /* Limit max width on larger screens */
+            height: auto; /* Maintain aspect ratio */
+            border: 4px solid #FFD180; /* Soft Yellow border */
+            border-radius: 12px;
+            display: block;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
+        }
+
+        /* Button styling */
+        button {
+            background-color: #FF8A65; /* Peach Orange */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 138, 101, 0.2);
+            margin: 0 8px 10px; /* Space between buttons and below */
+        }
+
+        button:hover {
+            background-color: #FFD180; /* Soft Yellow */
+            color: #3E2723;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(255, 209, 128, 0.3);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 680px) { /* Adjust breakpoint as needed, slightly larger than max-width of video */
+            h2 {
+                font-size: 24px;
+            }
+            h1#result {
+                font-size: 18px;
+            }
+            /* Make buttons stack on very small screens if necessary */
+            div.button-group {
+                flex-direction: column; /* Stack buttons vertically */
+                width: 100%; /* Allow buttons to take full width */
+            }
+            div.button-group button {
+                width: calc(100% - 16px); /* Adjust for margin */
+                margin: 8px 8px; /* More vertical margin when stacked */
+            }
+        }
+        @media (max-width: 480px) {
+             h2 {
+                font-size: 22px;
+            }
+            h1#result {
+                font-size: 16px;
+            }
+        }
+
+        /* Style for the button group to allow flexing */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<script src="./static/Pages/photoscript.js" type="module"></script>
+<body>
+    <h2>Webcam Capture 📸</h2>
+    <h1 id="result">---</h1>
+    <video id="video" autoplay></video>
+    <div class="button-group">
+        <button id="snap">Take Photo</button>
+        <button id="save">Send as PNG</button>
+    </div>
+    <canvas id="canvas"></canvas>
+</body>
+</html>
