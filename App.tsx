@@ -1,39 +1,111 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Camera, useCameraDevices } from 'react-native-vision-camera';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function App() {
-  const devices = useCameraDevices();
-const device = devices.find((d) => d.position === 'back');
- // safe optional chaining to avoid errors
+type Props = {
+  className: string;
+  section: string;
+};
 
-  const [hasPermission, setHasPermission] = useState(false);
+const AttendanceScreen: React.FC<Props> = ({ className, section }) => {
+  const [otp, setOtp] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function requestPermissions() {
-      const status = await Camera.requestCameraPermission();
-      setHasPermission(
-        status.toLowerCase() === 'authorized' || status.toLowerCase() === 'granted'
-      );
-    }
-    requestPermissions();
-  }, []);
+  // Placeholder for future backend call
+  const fetchOtpFromBackend = async () => {
+    // Backend API call will go here later,
+    // and update setOtp with the result
+    // For now just simulate a wait or do nothing.
+  };
 
-  if (!device) {
-    return <Text>Loading camera devices...</Text>;  // wait until back camera is available
-  }
+  const handleGenerateOTP = () => {
+    fetchOtpFromBackend();
+    // For now, just show a placeholder alert or 
+    // you could navigate to OTP display screen.
+  };
 
-  if (!hasPermission) {
-    return <Text>No camera permission</Text>;
-  }
+  const handleCheckAttendance = () => {
+    console.log('Check Attendance clicked');
+  };
 
   return (
     <View style={styles.container}>
-      <Camera style={StyleSheet.absoluteFill} device={device} isActive={true} />
+      <View style={styles.navbar}>
+        <Text style={styles.navbarText}>
+          Class: {className} | Section: {section}
+        </Text>
+      </View>
+
+      <View style={styles.optionsContainer}>
+        <TouchableOpacity style={styles.button} onPress={handleGenerateOTP}>
+          <Text style={styles.buttonText}>Generate OTP</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={handleCheckAttendance}>
+          <Text style={styles.buttonText}>Check Attendance</Text>
+        </TouchableOpacity>
+      </View>
+
+      {otp && (
+        <View style={styles.otpDisplayContainer}>
+          <Text style={styles.otpDisplayText}>OTP: {otp}</Text>
+        </View>
+      )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: {
+    flex: 1,
+    backgroundColor: '#FFF6F1',
+  },
+  navbar: {
+    height: 60,
+    backgroundColor: '#FFB88C',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 3,
+    shadowColor: '#FFB88C',
+    shadowOpacity: 0.35,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 6,
+  },
+  navbarText: {
+    color: '#482E21',
+    fontSize: 19,
+    fontWeight: 'bold',
+  },
+  optionsContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#FF9666',
+    marginVertical: 12,
+    paddingVertical: 18,
+    paddingHorizontal: 50,
+    borderRadius: 12,
+    shadowColor: '#FFD8C0',
+    shadowOpacity: 0.13,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 17,
+    fontWeight: 'bold',
+    letterSpacing: 0.3,
+  },
+  otpDisplayContainer: {
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  otpDisplayText: {
+    fontSize: 18,
+    color: '#482E21',
+    fontWeight: '600',
+  },
 });
+
+export default AttendanceScreen;
